@@ -50,7 +50,9 @@
                 <div class="form-inline text-center">
                     <label class="control-label" for="type">{$LANG.clientareacancellationtype}</label>
                     <select name="type" id="type" class="form-control">
+                        {if 1==2}
                         <option value="Immediate">{$LANG.clientareacancellationimmediate}</option>
+                        {/if}
                         <option value="End of Billing Period">{$LANG.clientareacancellationendofbillingperiod}</option>
                     </select>
                 </div>

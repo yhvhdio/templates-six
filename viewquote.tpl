@@ -9,6 +9,7 @@
     <link href="{$WEB_ROOT}/templates/{$template}/css/all.min.css" rel="stylesheet">
     <link href="{$WEB_ROOT}/assets/css/fontawesome-all.min.css" rel="stylesheet">
     <link href="{$WEB_ROOT}/templates/{$template}/css/invoice.css" rel="stylesheet">
+    <link href="{$WEB_ROOT}/templates/{$template}/css/custom.css" rel="stylesheet">
 
 </head>
 <body>
@@ -25,7 +26,8 @@
                 <div class="col-sm-7">
 
                     {if $logo}
-                        <p><img src="{$logo}" title="{$companyname}" /></p>
+                        <!--<p><img src="{$logo}" title="{$companyname}" /></p>-->
+                        <p><img class="viewinvoice-logo" src="https://drive.google.com/uc?id=1Hb8cZ-W6bPuro-AsnYs8rc-XH3qs9TZ1" title="{$companyname}" /></p>
                     {else}
                         <h2>{$companyname}</h2>
                     {/if}
@@ -128,28 +130,28 @@
                                     <tr>
                                         <td>{$item.description}{if $item.taxed} *{/if}</td>
                                         <td class="text-center">{if $item.discountpc > 0}{$item.discount} ({$item.discountpc}%){else} - {/if}</td>
-                                        <td class="text-center">{$item.amount}</td>
+                                        <td class="text-center">{$item.amount|replace:',':'.'}</td>
                                     </tr>
                                 {/foreach}
                                 <tr>
                                     <td colspan="2" class="total-row text-right"><strong>{$LANG.invoicessubtotal}</strong></td>
-                                    <td class="total-row text-center">{$subtotal}</td>
+                                    <td class="total-row text-center">{$subtotal|replace:',':'.'}</td>
                                 </tr>
                                 {if $taxrate}
                                     <tr>
                                         <td colspan="2" class="total-row text-right"><strong>{$taxrate}% {$taxname}</strong></td>
-                                        <td class="total-row text-center">{$tax}</td>
+                                        <td class="total-row text-center">{$tax|replace:',':'.'}</td>
                                     </tr>
                                 {/if}
                                 {if $taxrate2}
                                     <tr>
                                         <td colspan="2" class="total-row text-right"><strong>{$taxrate2}% {$taxname2}</strong></td>
-                                        <td class="total-row text-center">{$tax2}</td>
+                                        <td class="total-row text-center">{$tax2|replace:',':'.'}</td>
                                     </tr>
                                 {/if}
                                 <tr>
                                     <td colspan="2" class="total-row text-right"><strong>{$LANG.quotelinetotal}</strong></td>
-                                    <td class="total-row text-center">{$total}</td>
+                                    <td class="total-row text-center">{$total|replace:',':'.'}</td>
                                 </tr>
                             </tbody>
                         </table>

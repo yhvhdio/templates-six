@@ -6,3 +6,16 @@
     defined here.
 
 ***************************************************** */
+
+section#header .logo img {
+	max-height: 45px;
+}
+
+.viewinvoice-logo {
+	height: 3.1em;
+}
+
+/* fix - viewinvoice.php - metodo de pago overflow */
+.invoice-container form[action^="/viewinvoice.php"] select[name="gateway"] {
+	width: 100%;
+}

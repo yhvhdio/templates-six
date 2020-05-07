@@ -93,7 +93,11 @@
                     </div>
                     {if $item->hasBodyHtml()}
                         <div class="panel-body">
-                            {$item->getBodyHtml()}
+                            {if $item->getName() == 'Overdue Invoices'}
+                                {$item->getBodyHtml()|replace:',':'.'}
+                            {else}
+                                {$item->getBodyHtml()}
+                            {/if}
                         </div>
                     {/if}
                     {if $item->hasChildren()}

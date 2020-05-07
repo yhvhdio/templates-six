@@ -70,12 +70,12 @@
 
                         {if $firstpaymentamount neq $recurringamount}
                             <h4>{$LANG.firstpaymentamount}</h4>
-                            {$firstpaymentamount}
+                            {$firstpaymentamount|replace:',':'.'}
                         {/if}
 
                         {if $billingcycle != $LANG.orderpaymenttermonetime && $billingcycle != $LANG.orderfree}
                             <h4>{$LANG.recurringamount}</h4>
-                            {$recurringamount}
+                            {$recurringamount|replace:',':'.'}
                         {/if}
 
                         <h4>{$LANG.orderbillingcycle}</h4>

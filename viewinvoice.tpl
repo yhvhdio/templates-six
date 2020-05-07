@@ -9,6 +9,7 @@
     <link href="{$WEB_ROOT}/templates/{$template}/css/all.min.css" rel="stylesheet">
     <link href="{$WEB_ROOT}/assets/css/fontawesome-all.min.css" rel="stylesheet">
     <link href="{$WEB_ROOT}/templates/{$template}/css/invoice.css" rel="stylesheet">
+    <link href="{$WEB_ROOT}/templates/{$template}/css/custom.css" rel="stylesheet">
     <script src="{$WEB_ROOT}/templates/{$template}/js/scripts.min.js?v={$versionHash}"></script>
 
 </head>
@@ -26,7 +27,8 @@
                 <div class="invoice-col">
 
                     {if $logo}
-                        <p><img src="{$logo}" title="{$companyname}" /></p>
+                        <!--<p><img src="{$logo}" title="{$companyname}" /></p>-->
+                        <p><img class="viewinvoice-logo" src="https://drive.google.com/uc?id=1Hb8cZ-W6bPuro-AsnYs8rc-XH3qs9TZ1" title="{$companyname}" /></p>
                     {else}
                         <h2>{$companyname}</h2>
                     {/if}
@@ -95,8 +97,21 @@
                         {if $clientsdetails.companyname}{$clientsdetails.companyname}<br />{/if}
                         {$clientsdetails.firstname} {$clientsdetails.lastname}<br />
                         {$clientsdetails.address1}, {$clientsdetails.address2}<br />
-                        {$clientsdetails.city}, {$clientsdetails.state}, {$clientsdetails.postcode}<br />
-                        {$clientsdetails.country}
+
+                        {if $clientsdetails.city|trim != ''}
+                            {$clientsdetails.city|trim},
+                        {/if}
+
+                        {if $clientsdetails.state|trim != ''}
+                            {$clientsdetails.state|trim},
+                        {/if}
+
+                        {if $clientsdetails.postcode|trim != ''}
+                            C.P. {$clientsdetails.postcode|trim},
+                        {/if}
+
+                        {$clientsdetails.country|trim}<br />
+
                         {if $clientsdetails.tax_id}
                             <br />{$taxIdLabel}: {$clientsdetails.tax_id}
                         {/if}
@@ -142,11 +157,11 @@
                     <div class="panel-body">
                         <form method="post" action="{$smarty.server.PHP_SELF}?id={$invoiceid}">
                             <input type="hidden" name="applycredit" value="true" />
-                            {$LANG.invoiceaddcreditdesc1} <strong>{$totalcredit}</strong>. {$LANG.invoiceaddcreditdesc2}. {$LANG.invoiceaddcreditamount}:
+                            {$LANG.invoiceaddcreditdesc1} <strong>{str_replace(',', '.', $totalcredit)}</strong>. {$LANG.invoiceaddcreditdesc2}. {$LANG.invoiceaddcreditamount}:
                             <div class="row">
                                 <div class="col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-4">
                                     <div class="input-group">
-                                        <input type="text" name="creditamount" value="{$creditamount}" class="form-control" />
+                                        <input type="text" name="creditamount" value="{floor($creditamount)}" class="form-control" />
                                         <span class="input-group-btn">
                                             <input type="submit" value="{$LANG.invoiceaddcreditapply}" class="btn btn-success" />
                                         </span>
@@ -179,32 +194,32 @@
                                 {foreach from=$invoiceitems item=item}
                                     <tr>
                                         <td>{$item.description}{if $item.taxed eq "true"} *{/if}</td>
-                                        <td class="text-center">{$item.amount}</td>
+                                        <td class="text-center">{str_replace(',', '.', $item.amount)}</td>
                                     </tr>
                                 {/foreach}
                                 <tr>
                                     <td class="total-row text-right"><strong>{$LANG.invoicessubtotal}</strong></td>
-                                    <td class="total-row text-center">{$subtotal}</td>
+                                    <td class="total-row text-center">{str_replace(',', '.', $subtotal)}</td>
                                 </tr>
                                 {if $taxname}
                                     <tr>
                                         <td class="total-row text-right"><strong>{$taxrate}% {$taxname}</strong></td>
-                                        <td class="total-row text-center">{$tax}</td>
+                                        <td class="total-row text-center">{str_replace(',', '.', $tax)}</td>
                                     </tr>
                                 {/if}
                                 {if $taxname2}
                                     <tr>
                                         <td class="total-row text-right"><strong>{$taxrate2}% {$taxname2}</strong></td>
-                                        <td class="total-row text-center">{$tax2}</td>
+                                        <td class="total-row text-center">{str_replace(',', '.', $tax2)}</td>
                                     </tr>
                                 {/if}
                                 <tr>
                                     <td class="total-row text-right"><strong>{$LANG.invoicescredit}</strong></td>
-                                    <td class="total-row text-center">{$credit}</td>
+                                    <td class="total-row text-center">{str_replace(',', '.', $credit)}</td>
                                 </tr>
                                 <tr>
                                     <td class="total-row text-right"><strong>{$LANG.invoicestotal}</strong></td>
-                                    <td class="total-row text-center">{$total}</td>
+                                    <td class="total-row text-center">{str_replace(',', '.', $total)}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -233,7 +248,7 @@
                                     <td class="text-center">{$transaction.date}</td>
                                     <td class="text-center">{$transaction.gateway}</td>
                                     <td class="text-center">{$transaction.transid}</td>
-                                    <td class="text-center">{$transaction.amount}</td>
+                                    <td class="text-center">{str_replace(',', '.', $transaction.amount)}</td>
                                 </tr>
                             {foreachelse}
                                 <tr>
@@ -242,7 +257,7 @@
                             {/foreach}
                             <tr>
                                 <td class="text-right" colspan="3"><strong>{$LANG.invoicesbalance}</strong></td>
-                                <td class="text-center">{$balance}</td>
+                                <td class="text-center">{str_replace(',', '.', $balance)}</td>
                             </tr>
                         </tbody>
                     </table>

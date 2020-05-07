@@ -19,7 +19,7 @@
                 {foreach from=$invoiceitem item=item}
                     <tr class="masspay-invoice-detail">
                         <td>{$item.description}</td>
-                        <td>{$item.amount}</td>
+                        <td>{$item.amount|replace:',':'.'}</td>
                     </tr>
                 {/foreach}
             {foreachelse}
@@ -29,35 +29,35 @@
             {/foreach}
             <tr class="masspay-total">
                 <td class="text-right">{$LANG.invoicessubtotal}:</td>
-                <td>{$subtotal}</td>
+                <td>{$subtotal|replace:',':'.'}</td>
             </tr>
             {if $tax}
                 <tr class="masspay-total">
                     <td class="text-right">{$taxrate1}% {$taxname1}:</td>
-                    <td>{$tax}</td>
+                    <td>{$tax|replace:',':'.'}</td>
                 </tr>
             {/if}
             {if $tax2}
                 <tr class="masspay-total">
                     <td class="text-right">{$taxrate2}% {$taxname2}:</td>
-                    <td>{$tax2}</td>
+                    <td>{$tax2|replace:',':'.'}</td>
                 </tr>
             {/if}
             {if $credit}
                 <tr class="masspay-total">
                     <td class="text-right">{$LANG.invoicescredit}:</td>
-                    <td>{$credit}</td>
+                    <td>{$credit|replace:',':'.'}</td>
                 </tr>
             {/if}
             {if $partialpayments}
                 <tr class="masspay-total">
                     <td class="text-right">{$LANG.invoicespartialpayments}:</td>
-                    <td>{$partialpayments}</td>
+                    <td>{$partialpayments|replace:',':'.'}</td>
                 </tr>
             {/if}
             <tr class="masspay-total">
                 <td class="text-right">{$LANG.invoicestotaldue}:</td>
-                <td>{$total}</td>
+                <td>{$total|replace:',':'.'}</td>
             </tr>
         </tbody>
     </table>
