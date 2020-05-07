@@ -91,12 +91,14 @@
             {/if}
         </ul>
 
+        <a href="{$WEB_ROOT}/index.php" class="logo"><img src="https://drive.google.com/uc?id=1Hb8cZ-W6bPuro-AsnYs8rc-XH3qs9TZ1" alt="{$companyname}"></a>
+<!--
         {if $assetLogoPath}
             <a href="{$WEB_ROOT}/index.php" class="logo"><img src="{$assetLogoPath}" alt="{$companyname}"></a>
         {else}
             <a href="{$WEB_ROOT}/index.php" class="logo logo-text">{$companyname}</a>
         {/if}
-
+-->
     </div>
 </section>
 
